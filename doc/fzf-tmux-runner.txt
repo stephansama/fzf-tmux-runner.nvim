@@ -1,46 +1,46 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.toggle()*
-                           `YourPluginName.toggle`()
+                                                        *FzfTmuxRunner.toggle()*
+                            `FzfTmuxRunner.toggle`()
 Toggle the plugin by calling the `enable`/`disable` methods respectively.
 
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.enable()*
-                        `YourPluginName.enable`({scope})
+                                                        *FzfTmuxRunner.enable()*
+                        `FzfTmuxRunner.enable`({scope})
 Initializes the plugin, sets event listeners and internal state.
 
 ------------------------------------------------------------------------------
-                                                      *YourPluginName.disable()*
-                           `YourPluginName.disable`()
+                                                       *FzfTmuxRunner.disable()*
+                           `FzfTmuxRunner.disable`()
 Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.options*
-                            `YourPluginName.options`
-YourPluginName configuration with its default values.
+                                                         *FzfTmuxRunner.options*
+                            `FzfTmuxRunner.options`
+FzfTmuxRunner configuration with its default values.
 
 Type ~
 `(table)`
 Default values:
 >lua
-  YourPluginName.options = {
+  FzfTmuxRunner.options = {
       -- Prints useful logs about what event are triggered, and reasons actions are executed.
       debug = false,
   }
 
 <
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.setup()*
-                       `YourPluginName.setup`({options})
-Define your your-plugin-name setup.
+                                                         *FzfTmuxRunner.setup()*
+                        `FzfTmuxRunner.setup`({options})
+Define your fzf-tmux-runner setup.
 
 Parameters ~
-{options} `(table)` Module config table. See |YourPluginName.options|.
+{options} `(table)` Module config table. See |FzfTmuxRunner.options|.
 
 Usage ~
-`require("your-plugin-name").setup()` (add `{}` with your |YourPluginName.options| table)
+`require("fzf-tmux-runner").setup()` (add `{}` with your |FzfTmuxRunner.options| table)
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:

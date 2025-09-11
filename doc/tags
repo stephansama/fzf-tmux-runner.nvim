@@ -1,5 +1,5 @@
-YourPluginName.disable()	neovim-plugin-boilerplate.txt	/*YourPluginName.disable()*
-YourPluginName.enable()	neovim-plugin-boilerplate.txt	/*YourPluginName.enable()*
-YourPluginName.options	neovim-plugin-boilerplate.txt	/*YourPluginName.options*
-YourPluginName.setup()	neovim-plugin-boilerplate.txt	/*YourPluginName.setup()*
-YourPluginName.toggle()	neovim-plugin-boilerplate.txt	/*YourPluginName.toggle()*
+FzfTmuxRunner.disable()	fzf-tmux-runner.txt	/*FzfTmuxRunner.disable()*
+FzfTmuxRunner.enable()	fzf-tmux-runner.txt	/*FzfTmuxRunner.enable()*
+FzfTmuxRunner.options	fzf-tmux-runner.txt	/*FzfTmuxRunner.options*
+FzfTmuxRunner.setup()	fzf-tmux-runner.txt	/*FzfTmuxRunner.setup()*
+FzfTmuxRunner.toggle()	fzf-tmux-runner.txt	/*FzfTmuxRunner.toggle()*
