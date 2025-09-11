@@ -5,6 +5,10 @@ end
 
 _G.FzfTmuxRunnerLoaded = true
 
+vim.api.nvim_create_user_command("FzfTmuxMake", function()
+    require("fzf-tmux-runner").make()
+end, {})
+
 vim.api.nvim_create_user_command("FzfTmuxPackageJson", function()
     require("fzf-tmux-runner").pkgjson()
 end, {})

@@ -3,6 +3,50 @@ local config = require("fzf-tmux-runner.config")
 
 local FzfTmuxRunner = {}
 
+function FzfTmuxRunner.make()
+    local makefile_output = vim.system({
+        "sh",
+        "-c",
+        "find . -type f -name 'Makefile' -not -path '*/node_modules/*' | fzf --tmux",
+    }):wait()
+
+    local makefile_stdout = makefile_output.stdout
+
+    if makefile_stdout == "" then
+        return vim.print("no makefile selected")
+    end
+
+    local target_output = vim.system({
+        "sh",
+        "-c",
+        "find-makefile-targets " .. makefile_stdout,
+    }):wait()
+
+    local target_stdout = target_output.stdout
+
+    if target_stdout == "" then
+        return vim.print("no targets found from selected makefile " .. makefile_stdout)
+    end
+
+    local selected_target_output = vim.system({
+        "sh",
+        "-c",
+        'echo "' .. target_stdout .. '" | fzf --tmux',
+    }):wait()
+
+    local selected_target_stdout = selected_target_output.stdout
+
+    if selected_target_stdout == "" then
+        return vim.print("no target selected")
+    end
+
+    vim.system({
+        "sh",
+        "-c",
+        string.format("tmux split-window -v '%s'", "make " .. selected_target_stdout),
+    })
+end
+
 function FzfTmuxRunner.pkgjson()
     local output = vim.system({
         "sh",
