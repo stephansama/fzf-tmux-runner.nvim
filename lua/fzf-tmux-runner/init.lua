@@ -71,7 +71,7 @@ function FzfTmuxRunner.pkgjson(opts)
         return vim.print("no item selected")
     end
 
-    run_split_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. stdout)
+    run_split_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. " " .. stdout)
 end
 
 -- setup FzfTmuxRunner options and merge them with user provided ones.
