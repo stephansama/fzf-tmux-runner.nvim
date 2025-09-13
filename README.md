@@ -1,36 +1,28 @@
 <p align="center">
-  <h1 align="center">fzf-tmux-runner.nvim</h2>
+  <h1 align="center">fzf-tmux-runner.nvim</h1>
 </p>
 
 <p align="center">
-    > A catch phrase that describes your plugin.
+  A Neovim plugin that allows you to run Makefile and package.json targets in a tmux split using fzf.
 </p>
 
 <div align="center">
-    > Drag your video (<10MB) here to host it for free on GitHub.
-</div>
-
-<div align="center">
-
-> Videos don't work on GitHub mobile, so a GIF alternative can help users.
-
-_[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
-
+    <img src="https://user-images.githubusercontent.com/1723413/152661939-47b43402-459c-4184-a111-753534ad6d53.gif" alt="Showcase" />
 </div>
 
 ## Prerequisites
 
-- [`@stephansama/find-makefile-runner`](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
+- [`@stephansama/find-makefile-targets`](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
 - [`fzf`](https://github.com/junegunn/fzf)
 - [`jq`](https://github.com/jqlang/jq)
+- [`tmux`](https://github.com/tmux/tmux)
 
 ## ⚡️ Features
 
-> Write short sentences describing your plugin features
-
-- FEATURE 1
-- FEATURE ..
-- FEATURE N
+- Run Makefile targets in a tmux split.
+- Run package.json scripts in a tmux split.
+- Fuzzy find Makefiles and package.json scripts.
+- Customizable split direction (horizontal or vertical).
 
 ## 📋 Installation
 
@@ -89,7 +81,7 @@ Plug "fzf-tmux-runner.nvim"
 -- stable version
 require("lazy").setup({{"fzf-tmux-runner.nvim", version = "*"}})
 -- dev version
-require("lazy").setup({"fzf-tmux-runner.nvim"})
+require("lazy").setup({{"fzf-tmux-runner.nvim"}})
 ```
 
 </td>
@@ -100,11 +92,14 @@ require("lazy").setup({"fzf-tmux-runner.nvim"})
 
 ## ☄ Getting started
 
-> Describe how to use the plugin the simplest way
+1. Install the plugin using your favorite package manager.
+2. Make sure you have the prerequisites installed.
+3. Run `:FzfTmuxMake` to select a Makefile and a target to run.
+4. Run `:FzfTmuxPackageJson` to select a package.json script to run.
 
 ## ⚙ Configuration
 
-> The configuration list sometimes become cumbersome, making it folded by default reduce the noise of the README file.
+You can configure the plugin by calling the `setup` function.
 
 <details>
 <summary>Click to unfold the full list of options with their default values</summary>
@@ -113,7 +108,12 @@ require("lazy").setup({"fzf-tmux-runner.nvim"})
 
 ```lua
 require("fzf-tmux-runner").setup({
-    -- you can copy the full list from lua/fzf-tmux-runner/config.lua
+    -- Prints useful logs about what event are triggered, and reasons actions are executed.
+    debug = false,
+    -- The direction of the tmux split.
+    direction = "horizontal",
+    -- The package manager to use for running package.json scripts.
+    package_manager = "pnpm run",
 })
 ```
 
@@ -123,7 +123,8 @@ require("fzf-tmux-runner").setup({
 
 |   Command   |         Description        |
 |-------------|----------------------------|
-|  `:Toggle`  |     Enables the plugin.    |
+|  `:FzfTmuxMake`  |     Run a Makefile target in a tmux split.    |
+|  `:FzfTmuxPackageJson`  |     Run a package.json script in a tmux split.    |
 
 ## ⌨ Contributing
 
@@ -135,4 +136,5 @@ You can find guides and showcase of the plugin on [the Wiki](https://github.com/
 
 ## 🎭 Motivations
 
-> If alternatives of your plugin exist, you can provide some pros/cons of using yours over the others.
+I wanted a simple way to run Makefile and package.json targets from Neovim without having to leave the editor. I also wanted to use fzf to fuzzy find the targets and tmux to run them in a split.
+
