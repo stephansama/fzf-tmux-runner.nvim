@@ -4,15 +4,18 @@ local FzfTmuxRunner = {}
 
 --- FzfTmuxRunner configuration with its default values.
 ---
----@type table
---- Default values:
----@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
+---@class FzfTmuxRunnerOptsFull
+---@field debug boolean
+---@field direction "horizontal" | "vertical"
+---@field package_manager "pnpm run" | "npm run" | "yarn" | "bun" | "deno" | string
+
+---@class (partial) FzfTmuxRunnerOpts : FzfTmuxRunnerOptsFull
+
+---@type FzfTmuxRunnerOptsFull
 FzfTmuxRunner.options = {
     -- Prints useful logs about what event are triggered, and reasons actions are executed.
     debug = false,
-    ---@type "horizontal" | "vertical"
     direction = "horizontal",
-    ---@type "pnpm run" | "npm run" | "yarn" | "bun" | string
     package_manager = "pnpm run",
 }
 
