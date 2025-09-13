@@ -1,9 +1,23 @@
-local main = require("fzf-tmux-runner.main")
 local config = require("fzf-tmux-runner.config")
 
 local FzfTmuxRunner = {}
 
-function FzfTmuxRunner.make()
+local function get_direction(input_direction)
+    return (input_direction or _G.FzfTmuxRunner.config.direction) == "horizontal" and "-h" or "-v"
+end
+
+local function run_split_command(input_direction, command)
+    local direction = get_direction(input_direction)
+
+    vim.system({
+        "sh",
+        "-c",
+        string.format("tmux split-window " .. direction .. " '%s'", command),
+    })
+end
+
+---@param opts vim.api.keyset.create_user_command.command_args
+function FzfTmuxRunner.make(opts)
     local makefile_output = vim.system({
         "sh",
         "-c",
@@ -31,7 +45,7 @@ function FzfTmuxRunner.make()
     local selected_target_output = vim.system({
         "sh",
         "-c",
-        'echo "' .. target_stdout .. '" | fzf --tmux',
+        string.format('echo "%s" | fzf --tmux', target_stdout),
     }):wait()
 
     local selected_target_stdout = selected_target_output.stdout
@@ -40,14 +54,11 @@ function FzfTmuxRunner.make()
         return vim.print("no target selected")
     end
 
-    vim.system({
-        "sh",
-        "-c",
-        string.format("tmux split-window -v '%s'", "make " .. selected_target_stdout),
-    })
+    run_split_command(opts.fargs[1], "make " .. selected_target_stdout)
 end
 
-function FzfTmuxRunner.pkgjson()
+---@param opts vim.api.keyset.create_user_command.command_args
+function FzfTmuxRunner.pkgjson(opts)
     local output = vim.system({
         "sh",
         "-c",
@@ -60,34 +71,7 @@ function FzfTmuxRunner.pkgjson()
         return vim.print("no item selected")
     end
 
-    vim.system({
-        "sh",
-        "-c",
-        string.format("tmux split-window -v '%s'", "pnpm run " .. stdout),
-    })
-end
-
---- Toggle the plugin by calling the `enable`/`disable` methods respectively.
-function FzfTmuxRunner.toggle()
-    if _G.FzfTmuxRunner.config == nil then
-        _G.FzfTmuxRunner.config = config.options
-    end
-
-    main.toggle("public_api_toggle")
-end
-
---- Initializes the plugin, sets event listeners and internal state.
-function FzfTmuxRunner.enable(scope)
-    if _G.FzfTmuxRunner.config == nil then
-        _G.FzfTmuxRunner.config = config.options
-    end
-
-    main.toggle(scope or "public_api_enable")
-end
-
---- Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
-function FzfTmuxRunner.disable()
-    main.toggle("public_api_disable")
+    run_split_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. stdout)
 end
 
 -- setup FzfTmuxRunner options and merge them with user provided ones.

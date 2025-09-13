@@ -5,10 +5,17 @@ end
 
 _G.FzfTmuxRunnerLoaded = true
 
-vim.api.nvim_create_user_command("FzfTmuxMake", function()
-    require("fzf-tmux-runner").make()
-end, {})
+local function directional_complete()
+    return {
+        "vertical",
+        "horizontal",
+    }
+end
 
-vim.api.nvim_create_user_command("FzfTmuxPackageJson", function()
-    require("fzf-tmux-runner").pkgjson()
-end, {})
+vim.api.nvim_create_user_command("FzfTmuxMake", function(opts)
+    require("fzf-tmux-runner").make(opts)
+end, { nargs = "?", complete = directional_complete })
+
+vim.api.nvim_create_user_command("FzfTmuxPackageJson", function(opts)
+    require("fzf-tmux-runner").pkgjson(opts)
+end, { nargs = "?", complete = directional_complete })

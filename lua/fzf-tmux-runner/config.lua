@@ -10,6 +10,10 @@ local FzfTmuxRunner = {}
 FzfTmuxRunner.options = {
     -- Prints useful logs about what event are triggered, and reasons actions are executed.
     debug = false,
+    ---@type "horizontal" | "vertical"
+    direction = "horizontal",
+    ---@type "pnpm run" | "npm run" | "yarn" | "bun" | string
+    package_manager = "pnpm run",
 }
 
 ---@private
@@ -21,8 +25,7 @@ local defaults = vim.deepcopy(FzfTmuxRunner.options)
 ---
 ---@private
 function FzfTmuxRunner.defaults(options)
-    FzfTmuxRunner.options =
-        vim.deepcopy(vim.tbl_deep_extend("keep", options or {}, defaults or {}))
+    FzfTmuxRunner.options = vim.deepcopy(vim.tbl_deep_extend("keep", options or {}, defaults or {}))
 
     -- let your user know that they provided a wrong value, this is reported when your plugin is executed.
     assert(
