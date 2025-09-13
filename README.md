@@ -7,7 +7,9 @@
 </p>
 
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/1723413/152661939-47b43402-459c-4184-a111-753534ad6d53.gif" alt="Showcase" />
+
+![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/images/fzf-tmux-runner.gif)
+
 </div>
 
 ## Prerequisites
@@ -79,9 +81,9 @@ Plug "fzf-tmux-runner.nvim"
 
 ```lua
 -- stable version
-require("lazy").setup({{"fzf-tmux-runner.nvim", version = "*"}})
+require("lazy").setup({{"stephansama/fzf-tmux-runner.nvim", version = "*"}})
 -- dev version
-require("lazy").setup({{"fzf-tmux-runner.nvim"}})
+require("lazy").setup({{"stephansama/fzf-tmux-runner.nvim"}})
 ```
 
 </td>
@@ -137,4 +139,3 @@ You can find guides and showcase of the plugin on [the Wiki](https://github.com/
 ## 🎭 Motivations
 
 I wanted a simple way to run Makefile and package.json targets from Neovim without having to leave the editor. I also wanted to use fzf to fuzzy find the targets and tmux to run them in a split.
-
