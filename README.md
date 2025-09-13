@@ -18,6 +18,12 @@ _[GIF version of the showcase video for mobile users](SHOWCASE_GIF_LINK)_
 
 </div>
 
+## Prerequisites
+
+- [`@stephansama/find-makefile-runner`](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
+- [`fzf`](https://github.com/junegunn/fzf)
+- [`jq`](https://github.com/jqlang/jq)
+
 ## ⚡️ Features
 
 > Write short sentences describing your plugin features
