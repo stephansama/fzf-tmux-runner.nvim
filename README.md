@@ -80,10 +80,21 @@ Plug "fzf-tmux-runner.nvim"
 <td>
 
 ```lua
--- stable version
-require("lazy").setup({{"stephansama/fzf-tmux-runner.nvim", version = "*"}})
--- dev version
-require("lazy").setup({{"stephansama/fzf-tmux-runner.nvim"}})
+require("lazy").setup({{
+ "stephansama/fzf-tmux-runner.nvim",
+ cmd = { "FzfTmuxPackageJson", "FzfTmuxMake" },
+ keys = {
+   {"<leader>fm", "<cmd>FzfTmuxMake<CR>", {desc = "launch makefile target"}},
+   {"<leader>fj", "<cmd>FzfTmuxPackageJson<CR>", {desc = "launch package json script"}}
+ },
+ config = true,
+ ---@module "fzf-tmux-runner"
+ ---@type FzfTmuxRunnerOpts
+ opts = {
+  package_manager = "nr",
+  direction = "vertical",
+ },
+}})
 ```
 
 </td>
