@@ -23,6 +23,7 @@ local function run_split_command(input_direction, command)
     vim.system({ "sh", "-c", full_command })
 end
 
+--- run mise targets directly from neovim
 function FzfTmuxRunner.mise(opts)
     local mise_output = vim.system({
         "sh",
@@ -41,6 +42,7 @@ function FzfTmuxRunner.mise(opts)
     run_split_command(opts.fargs[1], task)
 end
 
+--- run make targets directly from neovim
 function FzfTmuxRunner.make(opts)
     local makefile_output = vim.system({
         "sh",
@@ -81,6 +83,7 @@ function FzfTmuxRunner.make(opts)
     run_split_command(opts.fargs[1], "make " .. selected_target_stdout)
 end
 
+--- run package.json targets directly from neovim
 function FzfTmuxRunner.pkgjson(opts)
     local output = vim.system({
         "sh",

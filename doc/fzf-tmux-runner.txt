@@ -2,20 +2,17 @@
 ------------------------------------------------------------------------------
                                                           *FzfTmuxRunner.mise()*
                           `FzfTmuxRunner.mise`({opts})
-Parameters ~
-{opts} `(vim.api.keyset.create_user_command.command_args)`
+run mise targets directly from neovim
 
 ------------------------------------------------------------------------------
                                                           *FzfTmuxRunner.make()*
                           `FzfTmuxRunner.make`({opts})
-Parameters ~
-{opts} `(vim.api.keyset.create_user_command.command_args)`
+run make targets directly from neovim
 
 ------------------------------------------------------------------------------
                                                        *FzfTmuxRunner.pkgjson()*
                         `FzfTmuxRunner.pkgjson`({opts})
-Parameters ~
-{opts} `(vim.api.keyset.create_user_command.command_args)`
+run package.json targets directly from neovim
 
 
 ==============================================================================
