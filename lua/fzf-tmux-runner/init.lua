@@ -23,7 +23,6 @@ local function run_split_command(input_direction, command)
     vim.system({ "sh", "-c", full_command })
 end
 
----@param opts vim.api.keyset.create_user_command.command_args
 function FzfTmuxRunner.mise(opts)
     local mise_output = vim.system({
         "sh",
@@ -42,7 +41,6 @@ function FzfTmuxRunner.mise(opts)
     run_split_command(opts.fargs[1], task)
 end
 
----@param opts vim.api.keyset.create_user_command.command_args
 function FzfTmuxRunner.make(opts)
     local makefile_output = vim.system({
         "sh",
@@ -83,7 +81,6 @@ function FzfTmuxRunner.make(opts)
     run_split_command(opts.fargs[1], "make " .. selected_target_stdout)
 end
 
----@param opts vim.api.keyset.create_user_command.command_args
 function FzfTmuxRunner.pkgjson(opts)
     local output = vim.system({
         "sh",
