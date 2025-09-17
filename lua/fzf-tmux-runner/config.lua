@@ -7,6 +7,7 @@ local FzfTmuxRunner = {}
 ---@class FzfTmuxRunnerOptsFull
 ---@field debug boolean
 ---@field direction "horizontal" | "vertical"
+---@field interactive boolean
 ---@field package_manager "pnpm run" | "npm run" | "yarn" | "bun" | "deno" | string
 
 ---@class (partial) FzfTmuxRunnerOpts : FzfTmuxRunnerOptsFull
@@ -16,6 +17,7 @@ FzfTmuxRunner.options = {
     -- Prints useful logs about what event are triggered, and reasons actions are executed.
     debug = false,
     direction = "horizontal",
+    interactive = false,
     package_manager = "pnpm run",
 }
 

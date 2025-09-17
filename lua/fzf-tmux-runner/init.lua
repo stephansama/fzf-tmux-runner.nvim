@@ -9,11 +9,18 @@ end
 local function run_split_command(input_direction, command)
     local direction = get_direction(input_direction)
 
-    vim.system({
-        "sh",
-        "-c",
-        string.format("tmux split-window " .. direction .. " '%s'", command),
-    })
+    local shell = os.getenv("SHELL") or "sh"
+
+    local formatted_command = not _G.FzfTmuxRunner.config.interactive and command
+        or string.format("%s -ic ' %s; printf \\\"Press any key...\\\"; read _ '", shell, command)
+
+    local full_command = string.format('tmux split-window %s "%s"', direction, formatted_command)
+
+    if _G.FzfTmuxRunner.config.debug then
+        vim.print("Running:", full_command)
+    end
+
+    vim.system({ "sh", "-c", full_command })
 end
 
 ---@param opts vim.api.keyset.create_user_command.command_args
@@ -21,7 +28,7 @@ function FzfTmuxRunner.mise(opts)
     local mise_output = vim.system({
         "sh",
         "-c",
-        "mise tasks | fzf | awk '{print $1}'",
+        "mise tasks | fzf --tmux | awk '{print $1}'",
     }):wait()
 
     local mise_stdout = mise_output.stdout
@@ -30,7 +37,7 @@ function FzfTmuxRunner.mise(opts)
         return vim.print("no mise target selected")
     end
 
-    local task = "mise run " .. string.gsub(mise_stdout, "\n$", "")
+    local task = "mise run " .. string.gsub(mise_stdout, "%s+$", "")
 
     run_split_command(opts.fargs[1], task)
 end
