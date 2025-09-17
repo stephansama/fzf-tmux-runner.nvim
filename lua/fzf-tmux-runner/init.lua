@@ -9,14 +9,40 @@ end
 local function run_split_command(input_direction, command)
     local direction = get_direction(input_direction)
 
-    vim.system({
-        "sh",
-        "-c",
-        string.format("tmux split-window " .. direction .. " '%s'", command),
-    })
+    local shell = os.getenv("SHELL") or "sh"
+
+    local formatted_command = not _G.FzfTmuxRunner.config.interactive and command
+        or string.format("%s -ic ' %s; printf \\\"Press any key...\\\"; read _ '", shell, command)
+
+    local full_command = string.format('tmux split-window %s "%s"', direction, formatted_command)
+
+    if _G.FzfTmuxRunner.config.debug then
+        vim.print("Running:", full_command)
+    end
+
+    vim.system({ "sh", "-c", full_command })
 end
 
----@param opts vim.api.keyset.create_user_command.command_args
+--- run mise targets directly from neovim
+function FzfTmuxRunner.mise(opts)
+    local mise_output = vim.system({
+        "sh",
+        "-c",
+        "mise tasks | fzf --tmux | awk '{print $1}'",
+    }):wait()
+
+    local mise_stdout = mise_output.stdout
+
+    if mise_stdout == "" or mise_stdout == nil then
+        return vim.print("no mise target selected")
+    end
+
+    local task = "mise run " .. string.gsub(mise_stdout, "%s+$", "")
+
+    run_split_command(opts.fargs[1], task)
+end
+
+--- run make targets directly from neovim
 function FzfTmuxRunner.make(opts)
     local makefile_output = vim.system({
         "sh",
@@ -26,7 +52,7 @@ function FzfTmuxRunner.make(opts)
 
     local makefile_stdout = makefile_output.stdout
 
-    if makefile_stdout == "" then
+    if makefile_stdout == "" or makefile_stdout == nil then
         return vim.print("no makefile selected")
     end
 
@@ -50,14 +76,14 @@ function FzfTmuxRunner.make(opts)
 
     local selected_target_stdout = selected_target_output.stdout
 
-    if selected_target_stdout == "" then
+    if selected_target_stdout == "" or selected_target_stdout == nil then
         return vim.print("no target selected")
     end
 
     run_split_command(opts.fargs[1], "make " .. selected_target_stdout)
 end
 
----@param opts vim.api.keyset.create_user_command.command_args
+--- run package.json targets directly from neovim
 function FzfTmuxRunner.pkgjson(opts)
     local output = vim.system({
         "sh",

@@ -1,36 +1,42 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                        *FzfTmuxRunner.toggle()*
-                            `FzfTmuxRunner.toggle`()
-Toggle the plugin by calling the `enable`/`disable` methods respectively.
+                                                          *FzfTmuxRunner.mise()*
+                          `FzfTmuxRunner.mise`({opts})
+run mise targets directly from neovim
 
 ------------------------------------------------------------------------------
-                                                        *FzfTmuxRunner.enable()*
-                        `FzfTmuxRunner.enable`({scope})
-Initializes the plugin, sets event listeners and internal state.
+                                                          *FzfTmuxRunner.make()*
+                          `FzfTmuxRunner.make`({opts})
+run make targets directly from neovim
 
 ------------------------------------------------------------------------------
-                                                       *FzfTmuxRunner.disable()*
-                           `FzfTmuxRunner.disable`()
-Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
+                                                       *FzfTmuxRunner.pkgjson()*
+                        `FzfTmuxRunner.pkgjson`({opts})
+run package.json targets directly from neovim
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                         *FzfTmuxRunner.options*
-                            `FzfTmuxRunner.options`
 FzfTmuxRunner configuration with its default values.
 
-Type ~
-`(table)`
-Default values:
->lua
-  FzfTmuxRunner.options = {
-      -- Prints useful logs about what event are triggered, and reasons actions are executed.
-      debug = false,
-  }
+Class ~
+{FzfTmuxRunnerOptsFull}
+Fields ~
+{debug} `(boolean)`
+{direction} "`(horizontal)`" | "vertical"
+{interactive} `(boolean)`
+{package_manager} "`(pnpm)` run" | "npm run" | "yarn" | "bun" | "deno" | string
 
-<
+------------------------------------------------------------------------------
+Class ~
+{(partial)} FzfTmuxRunnerOpts : FzfTmuxRunnerOptsFull
+
+------------------------------------------------------------------------------
+                                                         *FzfTmuxRunner.options*
+                            `FzfTmuxRunner.options`
+Type ~
+`(FzfTmuxRunnerOptsFull)`
+
 ------------------------------------------------------------------------------
                                                          *FzfTmuxRunner.setup()*
                         `FzfTmuxRunner.setup`({options})

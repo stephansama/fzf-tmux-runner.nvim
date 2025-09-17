@@ -12,6 +12,10 @@ local function directional_complete()
     }
 end
 
+vim.api.nvim_create_user_command("FzfTmuxMise", function(opts)
+    require("fzf-tmux-runner").mise(opts)
+end, { nargs = "?", complete = directional_complete })
+
 vim.api.nvim_create_user_command("FzfTmuxMake", function(opts)
     require("fzf-tmux-runner").make(opts)
 end, { nargs = "?", complete = directional_complete })
