@@ -17,6 +17,25 @@ local function run_split_command(input_direction, command)
 end
 
 ---@param opts vim.api.keyset.create_user_command.command_args
+function FzfTmuxRunner.mise(opts)
+    local mise_output = vim.system({
+        "sh",
+        "-c",
+        "mise tasks | fzf | awk '{print $1}'",
+    }):wait()
+
+    local mise_stdout = mise_output.stdout
+
+    if mise_stdout == "" or mise_stdout == nil then
+        return vim.print("no mise target selected")
+    end
+
+    local task = "mise run " .. string.gsub(mise_stdout, "\n$", "")
+
+    run_split_command(opts.fargs[1], task)
+end
+
+---@param opts vim.api.keyset.create_user_command.command_args
 function FzfTmuxRunner.make(opts)
     local makefile_output = vim.system({
         "sh",
@@ -26,7 +45,7 @@ function FzfTmuxRunner.make(opts)
 
     local makefile_stdout = makefile_output.stdout
 
-    if makefile_stdout == "" then
+    if makefile_stdout == "" or makefile_stdout == nil then
         return vim.print("no makefile selected")
     end
 
@@ -50,7 +69,7 @@ function FzfTmuxRunner.make(opts)
 
     local selected_target_stdout = selected_target_output.stdout
 
-    if selected_target_stdout == "" then
+    if selected_target_stdout == "" or selected_target_stdout == nil then
         return vim.print("no target selected")
     end
 
