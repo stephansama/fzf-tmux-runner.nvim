@@ -26,9 +26,9 @@ T["setup()"]["sets exposed methods and default options value"] = function()
     Helpers.expect.global_type(child, "_G.FzfTmuxRunner", "table")
 
     -- public methods
-    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.toggle", "function")
-    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.disable", "function")
-    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.enable", "function")
+    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.make", "function")
+    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.mise", "function")
+    Helpers.expect.global_type(child, "_G.FzfTmuxRunner.pkgjson", "function")
 
     -- config
     Helpers.expect.global_type(child, "_G.FzfTmuxRunner.config", "table")
