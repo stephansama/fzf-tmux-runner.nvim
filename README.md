@@ -8,7 +8,7 @@
 
 <div align="center">
 
-![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/images/fzf-tmux-runner.gif)
+![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/nvim-plugins/fzf-tmux-runner.gif)
 
 </div>
 
