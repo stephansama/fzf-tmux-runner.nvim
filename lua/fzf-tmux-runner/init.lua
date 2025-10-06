@@ -88,7 +88,7 @@ function FzfTmuxRunner.pkgjson(opts)
     local output = vim.system({
         "sh",
         "-c",
-        "cat package.json | jq '.scripts' | jq 'keys' | jq '.[]' | tr -d '\"' | fzf --tmux",
+        "cat package.json | jq '.scripts | keys | .[]' | tr -d '\"' | fzf --tmux",
     }):wait()
 
     local stdout = output.stdout
