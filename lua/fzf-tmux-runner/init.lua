@@ -12,7 +12,11 @@ local function run_split_command(input_direction, command)
     local shell = os.getenv("SHELL") or "sh"
 
     local formatted_command = not _G.FzfTmuxRunner.config.interactive and command
-        or string.format("%s -ic ' %s; printf \\\"Press any key...\\\"; read _ '", shell, command)
+        or string.format(
+            "%s -ic ' %s; printf \\\"Press any key to exit...\\\"; read _ '",
+            shell,
+            command
+        )
 
     local full_command = string.format('tmux split-window %s "%s"', direction, formatted_command)
 
@@ -100,7 +104,6 @@ function FzfTmuxRunner.pkgjson(opts)
     run_split_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. " " .. stdout)
 end
 
--- setup FzfTmuxRunner options and merge them with user provided ones.
 function FzfTmuxRunner.setup(opts)
     _G.FzfTmuxRunner.config = config.setup(opts)
 end
