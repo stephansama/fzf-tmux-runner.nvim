@@ -4,7 +4,14 @@ local util = require("fzf-tmux-runner.util.command")
 local FzfTmuxRunner = {}
 
 function FzfTmuxRunner.mise(opts)
-    local task = util.run_command("mise tasks | fzf --tmux | awk '{print $1}'")
+    local tasks = util.run_command("mise tasks")
+
+    if tasks == nil then
+        return vim.notify("no mise tasks defined", vim.log.levels.WARN)
+    end
+
+    local task =
+        util.run_command(string.format("echo \"%s\" | fzf --tmux | awk '{print $1}'", tasks))
 
     if task == nil then
         return vim.notify("no mise target selected", vim.log.levels.INFO)
@@ -41,6 +48,10 @@ function FzfTmuxRunner.make(opts)
 end
 
 function FzfTmuxRunner.pkgjson(opts)
+    if vim.fn.filereadable("package.json") ~= 1 then
+        return vim.notify("no package.json found", vim.log.levels.WARN)
+    end
+
     local script =
         util.run_command("cat package.json | jq '.scripts | keys | .[]' | tr -d '\"' | fzf --tmux")
 
