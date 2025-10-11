@@ -16,92 +16,40 @@
 
 - [`@stephansama/find-makefile-targets`](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
 - [`fzf`](https://github.com/junegunn/fzf)
+- [`node`](https://nodejs.org/en)
 - [`jq`](https://github.com/jqlang/jq)
 - [`tmux`](https://github.com/tmux/tmux)
+- [`make`](https://www.gnu.org/software/make/) [optional]
+- [`mise`](https://mise.jdx.dev/getting-started.html) [optional]
 
 ## ⚡️ Features
 
 - Run Makefile targets in a tmux split.
+- Run Mise targets in a tmux split.
 - Run package.json scripts in a tmux split.
-- Fuzzy find Makefiles and package.json scripts.
 - Customizable split direction (horizontal or vertical).
 
 ## 📋 Installation
 
-<div align="center">
-<table>
-<thead>
-<tr>
-<th>Package manager</th>
-<th>Snippet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)
-
-</td>
-<td>
-
 ```lua
--- stable version
-use {"fzf-tmux-runner.nvim", tag = "*" }
--- dev version
-use {"fzf-tmux-runner.nvim"}
+require("lazy").setup({
+    {
+        "stephansama/fzf-tmux-runner.nvim",
+        cmd = { "FzfTmuxPackageJson", "FzfTmuxMake" },
+        keys = {
+            { "<leader>fm", "<cmd>FzfTmuxMake<CR>", { desc = "launch makefile target" } },
+            { "<leader>fj", "<cmd>FzfTmuxPackageJson<CR>", { desc = "launch package json script" } },
+        },
+        config = true,
+        ---@module "fzf-tmux-runner"
+        ---@type FzfTmuxRunnerOpts
+        opts = {
+            package_manager = "nr",
+            direction = "vertical",
+        },
+    },
+})
 ```
-
-</td>
-</tr>
-<tr>
-<td>
-
-[junegunn/vim-plug](https://github.com/junegunn/vim-plug)
-
-</td>
-<td>
-
-```lua
--- stable version
-Plug "fzf-tmux-runner.nvim", { "tag": "*" }
--- dev version
-Plug "fzf-tmux-runner.nvim"
-```
-
-</td>
-</tr>
-<tr>
-<td>
-
-[folke/lazy.nvim](https://github.com/folke/lazy.nvim)
-
-</td>
-<td>
-
-```lua
-require("lazy").setup({{
- "stephansama/fzf-tmux-runner.nvim",
- cmd = { "FzfTmuxPackageJson", "FzfTmuxMake" },
- keys = {
-   {"<leader>fm", "<cmd>FzfTmuxMake<CR>", {desc = "launch makefile target"}},
-   {"<leader>fj", "<cmd>FzfTmuxPackageJson<CR>", {desc = "launch package json script"}}
- },
- config = true,
- ---@module "fzf-tmux-runner"
- ---@type FzfTmuxRunnerOpts
- opts = {
-  package_manager = "nr",
-  direction = "vertical",
- },
-}})
-```
-
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 
 ## ☄ Getting started
 
@@ -137,6 +85,8 @@ require("fzf-tmux-runner").setup({
 |   Command   |         Description        |
 |-------------|----------------------------|
 |  `:FzfTmuxMake`  |     Run a Makefile target in a tmux split.    |
+|  `:FzfTmuxMise`  |     Run a Mise task in a tmux split.    |
+|  `:FzfTmuxMiseOrMake`  |     Conditionally run mise or make depending on availability|
 |  `:FzfTmuxPackageJson`  |     Run a package.json script in a tmux split.    |
 
 ## ⌨ Contributing
@@ -150,3 +100,9 @@ You can find guides and showcase of the plugin on [the Wiki](https://github.com/
 ## 🎭 Motivations
 
 I wanted a simple way to run Makefile and package.json targets from Neovim without having to leave the editor. I also wanted to use fzf to fuzzy find the targets and tmux to run them in a split.
+
+<div align="center">
+
+Copyright © 2023-present [`@stephansama`](https://github.com/stephansama)
+
+</div>

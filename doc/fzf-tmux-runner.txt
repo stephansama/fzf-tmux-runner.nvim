@@ -1,22 +1,5 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                          *FzfTmuxRunner.mise()*
-                          `FzfTmuxRunner.mise`({opts})
-run mise targets directly from neovim
-
-------------------------------------------------------------------------------
-                                                          *FzfTmuxRunner.make()*
-                          `FzfTmuxRunner.make`({opts})
-run make targets directly from neovim
-
-------------------------------------------------------------------------------
-                                                       *FzfTmuxRunner.pkgjson()*
-                        `FzfTmuxRunner.pkgjson`({opts})
-run package.json targets directly from neovim
-
-
-==============================================================================
-------------------------------------------------------------------------------
 FzfTmuxRunner configuration with its default values.
 
 Class ~
@@ -47,6 +30,33 @@ Parameters ~
 
 Usage ~
 `require("fzf-tmux-runner").setup()` (add `{}` with your |FzfTmuxRunner.options| table)
+
+
+==============================================================================
+------------------------------------------------------------------------------
+                                                             *M.get_direction()*
+                      `M.get_direction`({input_direction})
+Parameters ~
+{input_direction} `(string)`
+
+------------------------------------------------------------------------------
+                                                *M.create_interactive_command()*
+                   `M.create_interactive_command`({command})
+Parameters ~
+{command} `(string)`
+
+------------------------------------------------------------------------------
+                                                          *M.run_tmux_command()*
+               `M.run_tmux_command`({input_direction}, {command})
+Parameters ~
+{input_direction} `(string)`
+{command} `(string)`
+
+------------------------------------------------------------------------------
+                                                               *M.run_command()*
+                           `M.run_command`({command})
+Parameters ~
+{command} `(string)`
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:
