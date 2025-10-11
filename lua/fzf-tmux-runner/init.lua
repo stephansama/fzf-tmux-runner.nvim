@@ -1,70 +1,28 @@
 local config = require("fzf-tmux-runner.config")
+local util = require("fzf-tmux-runner.util.command")
 
 local FzfTmuxRunner = {}
 
----@param input_direction string
-local function get_direction(input_direction)
-    return (input_direction or _G.FzfTmuxRunner.config.direction) == "horizontal" and "-h" or "-v"
-end
-
----@param command string
-local function create_interactive_command(command)
-    if not _G.FzfTmuxRunner.config.interactive then
-        return command
-    end
-
-    return string.format(
-        "%s -ic ' %s; printf \\\"%s\\\"; read _ '",
-        os.getenv("SHELL") or "sh",
-        command,
-        "Press any key to exit..."
-    )
-end
-
----@param input_direction string
----@param command string
-local function run_tmux_command(input_direction, command)
-    local direction = get_direction(input_direction)
-
-    local cmd = create_interactive_command(command)
-
-    local full_command = string.format('tmux split-window %s "%s"', direction, cmd)
-
-    if _G.FzfTmuxRunner.config.debug then
-        vim.notify(string.format("Running:", full_command), vim.log.levels.INFO)
-    end
-
-    vim.system({ "sh", "-c", full_command })
-end
-
----@param command string
-local function run_command(command)
-    local output = vim.system({ "sh", "-c", command }):wait()
-
-    if output.code == 0 and output.stdout ~= "" and output.stdout ~= nil then
-        return output.stdout
-    end
-end
-
 function FzfTmuxRunner.mise(opts)
-    local task = run_command("mise tasks | fzf --tmux | awk '{print $1}'")
+    local task = util.run_command("mise tasks | fzf --tmux | awk '{print $1}'")
 
     if task == nil then
         return vim.notify("no mise target selected", vim.log.levels.INFO)
     end
 
-    run_tmux_command(opts.fargs[1], "mise run " .. string.gsub(task, "%s+$", ""))
+    util.run_tmux_command(opts.fargs[1], "mise run " .. task)
 end
 
 function FzfTmuxRunner.make(opts)
-    local makefile =
-        run_command("find . -type f -name 'Makefile' -not -path '*/node_modules/*' | fzf --tmux")
+    local makefile = util.run_command(
+        "find . -type f -name 'Makefile' -not -path '*/node_modules/*' | fzf --tmux"
+    )
 
     if makefile == nil then
         return vim.notify("no makefile selected", vim.log.levels.INFO)
     end
 
-    local targets = run_command("find-makefile-targets " .. makefile)
+    local targets = util.run_command("find-makefile-targets " .. vim.fn.shellescape(makefile))
 
     if targets == nil then
         return vim.notify(
@@ -73,24 +31,24 @@ function FzfTmuxRunner.make(opts)
         )
     end
 
-    local selected_target = run_command(string.format('echo "%s" | fzf --tmux', targets))
+    local selected_target = util.run_command(string.format('echo "%s" | fzf --tmux', targets))
 
     if selected_target == nil then
         return vim.notify("no target selected", vim.log.levels.INFO)
     end
 
-    run_tmux_command(opts.fargs[1], "make " .. selected_target)
+    util.run_tmux_command(opts.fargs[1], "make " .. selected_target)
 end
 
 function FzfTmuxRunner.pkgjson(opts)
     local script =
-        run_command("cat package.json | jq '.scripts | keys | .[]' | tr -d '\"' | fzf --tmux")
+        util.run_command("cat package.json | jq '.scripts | keys | .[]' | tr -d '\"' | fzf --tmux")
 
     if script == nil then
         return vim.notify("no item selected", vim.log.levels.INFO)
     end
 
-    run_tmux_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. " " .. script)
+    util.run_tmux_command(opts.fargs[1], _G.FzfTmuxRunner.config.package_manager .. " " .. script)
 end
 
 FzfTmuxRunner.setup = config.setup

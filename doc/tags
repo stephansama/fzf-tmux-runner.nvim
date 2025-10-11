@@ -1,6 +1,6 @@
 FzfTmuxRunner.options	fzf-tmux-runner.txt	/*FzfTmuxRunner.options*
 FzfTmuxRunner.setup()	fzf-tmux-runner.txt	/*FzfTmuxRunner.setup()*
-create_interactive_command()	fzf-tmux-runner.txt	/*create_interactive_command()*
-get_direction()	fzf-tmux-runner.txt	/*get_direction()*
-run_command()	fzf-tmux-runner.txt	/*run_command()*
-run_tmux_command()	fzf-tmux-runner.txt	/*run_tmux_command()*
+M.create_interactive_command()	fzf-tmux-runner.txt	/*M.create_interactive_command()*
+M.get_direction()	fzf-tmux-runner.txt	/*M.get_direction()*
+M.run_command()	fzf-tmux-runner.txt	/*M.run_command()*
+M.run_tmux_command()	fzf-tmux-runner.txt	/*M.run_tmux_command()*

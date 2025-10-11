@@ -1,32 +1,5 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                               *get_direction()*
-                       `get_direction`({input_direction})
-Parameters ~
-{input_direction} `(string)`
-
-------------------------------------------------------------------------------
-                                                  *create_interactive_command()*
-                    `create_interactive_command`({command})
-Parameters ~
-{command} `(string)`
-
-------------------------------------------------------------------------------
-                                                            *run_tmux_command()*
-                `run_tmux_command`({input_direction}, {command})
-Parameters ~
-{input_direction} `(string)`
-{command} `(string)`
-
-------------------------------------------------------------------------------
-                                                                 *run_command()*
-                            `run_command`({command})
-Parameters ~
-{command} `(string)`
-
-
-==============================================================================
-------------------------------------------------------------------------------
 FzfTmuxRunner configuration with its default values.
 
 Class ~
@@ -57,6 +30,33 @@ Parameters ~
 
 Usage ~
 `require("fzf-tmux-runner").setup()` (add `{}` with your |FzfTmuxRunner.options| table)
+
+
+==============================================================================
+------------------------------------------------------------------------------
+                                                             *M.get_direction()*
+                      `M.get_direction`({input_direction})
+Parameters ~
+{input_direction} `(string)`
+
+------------------------------------------------------------------------------
+                                                *M.create_interactive_command()*
+                   `M.create_interactive_command`({command})
+Parameters ~
+{command} `(string)`
+
+------------------------------------------------------------------------------
+                                                          *M.run_tmux_command()*
+               `M.run_tmux_command`({input_direction}, {command})
+Parameters ~
+{input_direction} `(string)`
+{command} `(string)`
+
+------------------------------------------------------------------------------
+                                                               *M.run_command()*
+                           `M.run_command`({command})
+Parameters ~
+{command} `(string)`
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:
