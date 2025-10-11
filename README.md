@@ -100,3 +100,9 @@ You can find guides and showcase of the plugin on [the Wiki](https://github.com/
 ## 🎭 Motivations
 
 I wanted a simple way to run Makefile and package.json targets from Neovim without having to leave the editor. I also wanted to use fzf to fuzzy find the targets and tmux to run them in a split.
+
+<div align="center">
+
+Copyright © 2023-present [`@stephansama`](https://github.com/stephansama)
+
+</div>
