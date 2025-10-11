@@ -51,6 +51,8 @@ function FzfTmuxRunner.setup(options)
 
     log.warn_deprecation(FzfTmuxRunner.options)
 
+    _G.FzfTmuxRunner.config = FzfTmuxRunner.options
+
     return FzfTmuxRunner.options
 end
 
