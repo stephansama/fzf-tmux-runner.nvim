@@ -1,18 +1,28 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                          *FzfTmuxRunner.mise()*
-                          `FzfTmuxRunner.mise`({opts})
-run mise targets directly from neovim
+                                                               *get_direction()*
+                       `get_direction`({input_direction})
+Parameters ~
+{input_direction} `(string)`
 
 ------------------------------------------------------------------------------
-                                                          *FzfTmuxRunner.make()*
-                          `FzfTmuxRunner.make`({opts})
-run make targets directly from neovim
+                                                  *create_interactive_command()*
+                    `create_interactive_command`({command})
+Parameters ~
+{command} `(string)`
 
 ------------------------------------------------------------------------------
-                                                       *FzfTmuxRunner.pkgjson()*
-                        `FzfTmuxRunner.pkgjson`({opts})
-run package.json targets directly from neovim
+                                                            *run_tmux_command()*
+                `run_tmux_command`({input_direction}, {command})
+Parameters ~
+{input_direction} `(string)`
+{command} `(string)`
+
+------------------------------------------------------------------------------
+                                                                 *run_command()*
+                            `run_command`({command})
+Parameters ~
+{command} `(string)`
 
 
 ==============================================================================

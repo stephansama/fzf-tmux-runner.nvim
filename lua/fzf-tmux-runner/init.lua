@@ -41,8 +41,6 @@ end
 local function run_command(command)
     local output = vim.system({ "sh", "-c", command }):wait()
 
-    vim.print(vim.inspect(output))
-
     if output.code == 0 and output.stdout ~= "" and output.stdout ~= nil then
         return output.stdout
     end
@@ -63,7 +61,7 @@ function FzfTmuxRunner.make(opts)
         run_command("find . -type f -name 'Makefile' -not -path '*/node_modules/*' | fzf --tmux")
 
     if makefile == nil then
-        return vim.print("no makefile selected")
+        return vim.notify("no makefile selected", vim.log.levels.INFO)
     end
 
     local targets = run_command("find-makefile-targets " .. makefile)
