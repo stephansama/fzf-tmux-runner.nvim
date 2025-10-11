@@ -85,6 +85,8 @@ require("fzf-tmux-runner").setup({
 |   Command   |         Description        |
 |-------------|----------------------------|
 |  `:FzfTmuxMake`  |     Run a Makefile target in a tmux split.    |
+|  `:FzfTmuxMise`  |     Run a Mise task in a tmux split.    |
+|  `:FzfTmuxMiseOrMake`  |     Conditionally run mise or make depending on availability|
 |  `:FzfTmuxPackageJson`  |     Run a package.json script in a tmux split.    |
 
 ## ⌨ Contributing
